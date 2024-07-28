@@ -1,4 +1,4 @@
-package ru.practicum;
+package ru.practicum.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Entity
 @Accessors(chain = true)
 @Table(name = "statistics", schema = "public")
-public class Event {
+public class EndpointHit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
