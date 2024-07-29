@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.service.StatsService;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -23,11 +21,6 @@ public class StatsController {
     @PostMapping("/hit")
     public void save(@RequestBody EndpointHitDto hitDto) {
         service.save(hitDto);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(LocalDateTime.now());
-
     }
 
     @GetMapping("/stats")
