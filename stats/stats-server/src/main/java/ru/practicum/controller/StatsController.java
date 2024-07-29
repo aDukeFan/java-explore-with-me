@@ -12,6 +12,7 @@ import ru.practicum.service.StatsService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
