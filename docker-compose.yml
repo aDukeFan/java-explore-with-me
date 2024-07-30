@@ -32,13 +32,12 @@ services:
       - "8080:8080"
     depends_on:
       - ewm-db
-      - stats-server
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://evm-db:5432/postgres
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DRIVER_CLASS_NAME=org.postgresql.Driver
-      - STATS_SERVER_URL=http://local-host:9090
+      - STATS_SERVER_URL=http://stats-server:9090
 
   ewm-db:
     image: postgres:14-alpine
