@@ -1,13 +1,13 @@
 package ru.practicum.ewm.stats.controller;
 
 import ru.practicum.ewm.dto.stats.EndpointHitDto;
-import ru.practicum.ewm.dto.stats.ViewStatsDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.ewm.stats.model.ViewStats;
 import ru.practicum.ewm.stats.service.StatsService;
 
 import java.util.List;
@@ -24,10 +24,10 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public List<ViewStatsDto> get(@RequestParam String start,
-                                  @RequestParam String end,
-                                  @RequestParam List<String> uris,
-                                  @RequestParam Boolean unique) {
-        return null;
+    public List<ViewStats> get(@RequestParam String start,
+                               @RequestParam String end,
+                               @RequestParam List<String> uris,
+                               @RequestParam Boolean unique) {
+        return service.get(start, end, uris, unique);
     }
 }
