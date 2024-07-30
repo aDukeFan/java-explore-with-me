@@ -44,7 +44,7 @@ public class StatsServiceImp implements StatsService {
                     new ViewStats()
                             .setUri(uri)
                             .setApp(APP)
-                            .setHits(repository.countIpByUriAndTimestampBetween(uri, startTime, endTime))));
+                            .setHits(repository.countDistinctIpByUriAndTimestampBetween(uri, startTime, endTime))));
         } else {
             uris.forEach(uri -> viewStatsList.add(
                     new ViewStats()

@@ -11,5 +11,5 @@ public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
 
     Integer countByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
 
-    Integer countIpByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
+    Integer countDistinctIpByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
 }
