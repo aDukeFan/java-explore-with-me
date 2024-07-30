@@ -1,15 +1,16 @@
-package dto;
+package ru.practicum.ewm.dto.stats;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-@Setter
 @Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ViewStatsDto {
+public class EndpointHitDto {
     String app;
     String uri;
-    Integer hits;
+    String ip;
+    String timestamp;
 }
