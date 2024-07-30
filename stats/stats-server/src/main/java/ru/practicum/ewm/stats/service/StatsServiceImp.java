@@ -12,6 +12,7 @@ import ru.practicum.ewm.stats.repository.StatsRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -48,6 +49,7 @@ public class StatsServiceImp implements StatsService {
                             .setApp(APP)
                             .setHits(repository.countByUriAndTimestampBetween(uri, startTime, endTime))));
         }
+        viewStatsList.sort(Comparator.comparing(ViewStats::getHits).reversed());
         return viewStatsList;
     }
 }
