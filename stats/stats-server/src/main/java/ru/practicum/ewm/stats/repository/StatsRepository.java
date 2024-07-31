@@ -6,14 +6,18 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.ewm.stats.model.EndpointHit;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
 
     Integer countByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
 
-    @Query(value = "SELECT COUNT(DISTINCT ip) " +
-            "FROM statistics " +
+    @Query(value = "SELECT COUNT(DISTINCT ip) FROM statistics " +
             "WHERE uri = ? AND event_time  BETWEEN ? AND ?", nativeQuery = true)
     Integer countUniqueIpByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
+
+    @Query(value = "SELECT DISTINCT uri FROM statistics " +
+            "WHERE event_time BETWEEN ? AND ?", nativeQuery = true)
+    List<String> findAllUriByTimestampBetween(LocalDateTime start, LocalDateTime end);
 }

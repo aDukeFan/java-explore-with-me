@@ -32,13 +32,13 @@ public class StatsServiceImp implements StatsService {
 
     @Override
     public List<ViewStats> get(String start, String end, List<String> uris, Boolean unique) {
-        if (uris == null || uris.isEmpty()) {
-            return List.of();
-        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startTime = LocalDateTime.parse(start, formatter);
         LocalDateTime endTime = LocalDateTime.parse(end, formatter);
         List<ViewStats> viewStatsList = new ArrayList<>();
+        if (uris.isEmpty()) {
+            uris.addAll(repository.findAllUriByTimestampBetween(startTime, endTime));
+        }
         if (unique) {
             uris.forEach(uri -> viewStatsList.add(
                     new ViewStats()
