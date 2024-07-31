@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.ewm.stats.model.ViewStats;
+import ru.practicum.ewm.dto.stats.ViewStatsDto;
 import ru.practicum.ewm.stats.service.StatsService;
 
 import java.util.List;
@@ -24,10 +24,10 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public List<ViewStats> get(@RequestParam String start,
-                               @RequestParam String end,
-                               @RequestParam(required = false, defaultValue = "") List<String> uris,
-                               @RequestParam(required = false, defaultValue = "false") Boolean unique) {
+    public List<ViewStatsDto> get(@RequestParam String start,
+                                  @RequestParam String end,
+                                  @RequestParam(required = false, defaultValue = "") List<String> uris,
+                                  @RequestParam(required = false, defaultValue = "false") Boolean unique) {
         return service.get(start, end, uris, unique);
     }
 }
