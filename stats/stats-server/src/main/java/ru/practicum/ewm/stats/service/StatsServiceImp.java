@@ -44,12 +44,12 @@ public class StatsServiceImp implements StatsService {
                     new ViewStats()
                             .setUri(uri)
                             .setApp(APP)
-                            .setHits(repository.countDistinctIpByUriAndTimestampBetween(uri, startTime, endTime))));
+                            .setHits(repository.countUniqueIpByUriAndTimestampBetween(uri, startTime, endTime))));
         } else {
             uris.forEach(uri -> viewStatsList.add(
                     new ViewStats()
-                            .setUri(uri)
                             .setApp(APP)
+                            .setUri(uri)
                             .setHits(repository.countByUriAndTimestampBetween(uri, startTime, endTime))));
         }
         viewStatsList.sort(Comparator.comparing(ViewStats::getHits).reversed());
