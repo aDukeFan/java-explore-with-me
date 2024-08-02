@@ -23,34 +23,32 @@ public class StatsServiceImp implements StatsService {
     private final StatsRepository repository;
     private final EndpointHitMapper mapper;
 
-    private static final String APP = "ewm-main-service";
-
     @Override
     public void save(EndpointHitDto hitDto) {
         repository.save(mapper.toSave(hitDto));
     }
 
     @Override
-    public List<ViewStatsDto> get(String start, String end, List<String> uris, Boolean unique) {
+    public List<ViewStatsDto> get(String app, String start, String end, List<String> uris, Boolean unique) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime startTime = LocalDateTime.parse(start, formatter);
         LocalDateTime endTime = LocalDateTime.parse(end, formatter);
         List<ViewStatsDto> viewStatsList = new ArrayList<>();
         if (uris.isEmpty()) {
-            uris.addAll(repository.findAllUriByTimestampBetween(startTime, endTime));
+            uris.addAll(repository.findAllUriByAppAndTimestampBetween(app, startTime, endTime));
         }
         if (unique) {
             uris.forEach(uri -> viewStatsList.add(
                     new ViewStatsDto()
                             .setUri(uri)
-                            .setApp(APP)
-                            .setHits(repository.countUniqueIpByUriAndTimestampBetween(uri, startTime, endTime))));
+                            .setApp(app)
+                            .setHits(repository.countUniqueIpByAppAndUriAndTimestampBetween(app, uri, startTime, endTime))));
         } else {
             uris.forEach(uri -> viewStatsList.add(
                     new ViewStatsDto()
-                            .setApp(APP)
+                            .setApp(app)
                             .setUri(uri)
-                            .setHits(repository.countByUriAndTimestampBetween(uri, startTime, endTime))));
+                            .setHits(repository.countByAppAndUriAndTimestampBetween(app, uri, startTime, endTime))));
         }
         viewStatsList.sort(Comparator.comparing(ViewStatsDto::getHits).reversed());
         return viewStatsList;

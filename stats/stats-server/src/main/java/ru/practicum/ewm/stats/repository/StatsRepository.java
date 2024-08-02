@@ -11,13 +11,21 @@ import java.util.List;
 @Repository
 public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
 
-    Integer countByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
+    Integer countByAppAndUriAndTimestampBetween(String app,
+                                                String uri,
+                                                LocalDateTime start,
+                                                LocalDateTime end);
 
     @Query(value = "SELECT COUNT(DISTINCT ip) FROM statistics " +
-            "WHERE uri = ? AND event_time  BETWEEN ? AND ?", nativeQuery = true)
-    Integer countUniqueIpByUriAndTimestampBetween(String uri, LocalDateTime start, LocalDateTime end);
+            "WHERE app = ? AND uri = ? AND event_time  BETWEEN ? AND ?", nativeQuery = true)
+    Integer countUniqueIpByAppAndUriAndTimestampBetween(String app,
+                                                        String uri,
+                                                        LocalDateTime start,
+                                                        LocalDateTime end);
 
     @Query(value = "SELECT DISTINCT uri FROM statistics " +
-            "WHERE event_time BETWEEN ? AND ?", nativeQuery = true)
-    List<String> findAllUriByTimestampBetween(LocalDateTime start, LocalDateTime end);
+            "WHERE app = ? AND event_time BETWEEN ? AND ?", nativeQuery = true)
+    List<String> findAllUriByAppAndTimestampBetween(String app,
+                                                    LocalDateTime start,
+                                                    LocalDateTime end);
 }

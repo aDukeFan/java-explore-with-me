@@ -1,4 +1,4 @@
-package ru.practicum.ewm.stats;
+package ru.practicum.ewm.main;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
