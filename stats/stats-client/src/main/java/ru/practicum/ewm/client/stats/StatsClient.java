@@ -30,9 +30,10 @@ public class StatsClient {
         template.postForEntity("/hit", entity, EndpointHitDto.class);
     }
 
-    public List<ViewStatsDto> get(String start, String end, List<String> uris, Boolean unique) {
+    public List<ViewStatsDto> get(String app, String start, String end, List<String> uris, Boolean unique) {
         String uri = "/stats";
         Map<String, Object> params = Map.of(
+                "app", app,
                 "start", start,
                 "end", end,
                 "uris", uris,
