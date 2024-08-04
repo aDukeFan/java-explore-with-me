@@ -7,6 +7,8 @@ import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Setter
@@ -14,9 +16,12 @@ import javax.validation.constraints.Size;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Accessors(chain = true)
 public class NewUserRequest {
+    @NotNull
     @Email
     @Size(min = 6, max = 254)
     String email;
+    @NotNull
+    @NotBlank
     @Size(min = 2, max = 250)
     String name;
 }
