@@ -1,19 +1,34 @@
 package ru.practicum.ewm.main.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.ewm.main.dto.EventFullDto;
+import ru.practicum.ewm.main.dto.NewEventDto;
+import ru.practicum.ewm.main.service.UserService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/users")
 @AllArgsConstructor
 public class UserController {
 
+    private final UserService service;
+
+    @PostMapping("/{userId}/events")
+    public EventFullDto saveEvent(@PathVariable Integer userId,
+                                  @Valid @RequestBody NewEventDto newEventDto) {
+        return service.saveEvent(userId, newEventDto);
+    }
+
 //    @GetMapping("/{userId}/events")
-//    @PostMapping("/{userId}/events")
+//    public
+
+
 //    @GetMapping("/{userId}/events/{eventId}")
 //    @PatchMapping("/{userId}/events")
 //    @GetMapping("/{userId}/events/")

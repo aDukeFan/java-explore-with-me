@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
-import ru.practicum.ewm.main.util.Location;
 
 import javax.validation.constraints.Size;
 
@@ -20,7 +19,7 @@ public class NewEventDto {
     @Size(min = 20, max = 7000)
     String description;
     String eventDate;
-    Location location;
+    LocationDto location;
     Boolean paid;
     Integer participantLimit;
     Boolean requestModeration;
