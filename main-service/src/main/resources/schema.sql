@@ -37,3 +37,11 @@ CREATE TABLE IF NOT EXISTS events (
     FOREIGN KEY(category_id) REFERENCES categories(id),
     FOREIGN KEY(location_id) REFERENCES locations(id)
 );
+
+insert into users
+(member_name, email) values
+('misha', 'misha@ya.ru');
+
+insert into categories
+(category_name) values
+('cinema');

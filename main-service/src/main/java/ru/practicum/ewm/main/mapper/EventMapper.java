@@ -24,7 +24,9 @@ public interface EventMapper {
                  Integer userId,
                  NewEventDto newEventDto);
 
-    @Mapping(source = "event.user.name", target = "initiator.name")
+    @Mapping(target = "initiator.name", source = "event.user.name")
+    @Mapping(target = "eventDate", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(target = "createdOn", dateFormat = "yyyy-MM-dd HH:mm:ss")
     EventFullDto toShowWhileSave(Event event);
 
     EventShortDto toShowByUser(Event event);

@@ -3,6 +3,7 @@ package ru.practicum.ewm.main.model;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@ToString
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)

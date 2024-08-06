@@ -7,7 +7,6 @@ import ru.practicum.ewm.main.dto.EventFullDto;
 import ru.practicum.ewm.main.dto.NewEventDto;
 import ru.practicum.ewm.main.mapper.EventMapper;
 import ru.practicum.ewm.main.mapper.LocationMapper;
-import ru.practicum.ewm.main.model.Event;
 import ru.practicum.ewm.main.model.Location;
 import ru.practicum.ewm.main.model.State;
 import ru.practicum.ewm.main.repository.EventRepository;
@@ -28,16 +27,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public EventFullDto saveEvent(Integer userId, NewEventDto newEventDto) {
+        log.info("Пользователь с id: {} пытается создать событие: {}", userId, newEventDto);
         Location location = locationRepository.save(locationMapper.toSave(newEventDto.getLocation()));
         Integer locationId = location.getId();
         LocalDateTime createdOn = LocalDateTime.now();
-        Event savedEvent = eventRepository.save(eventMapper.toSave(
+        eventRepository.save(eventMapper.toSave(
                 State.PUBLISHED,
                 locationId,
                 createdOn,
                 userId,
                 newEventDto));
-        System.out.println(savedEvent.getUser().getName());
-        return eventMapper.toShowWhileSave(savedEvent);
+        System.out.println(eventRepository.getReferenceById(1));
+        return eventMapper.toShowWhileSave(eventRepository.getReferenceById(1));
     }
 }

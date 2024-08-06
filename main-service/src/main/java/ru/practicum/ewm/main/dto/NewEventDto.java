@@ -3,6 +3,7 @@ package ru.practicum.ewm.main.dto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Accessors(chain = true)
+@ToString
 public class NewEventDto {
     @Size(min = 20, max = 2000)
     String annotation;
