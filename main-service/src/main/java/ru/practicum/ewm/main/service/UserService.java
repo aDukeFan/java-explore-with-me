@@ -6,6 +6,4 @@ import ru.practicum.ewm.main.dto.NewEventDto;
 public interface UserService {
 
     EventFullDto saveEvent(Integer userId, NewEventDto newEventDto);
-
-
 }

@@ -1,10 +1,12 @@
 package ru.practicum.ewm.main.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.main.dto.EventFullDto;
 import ru.practicum.ewm.main.dto.NewEventDto;
@@ -20,13 +22,16 @@ public class UserController {
     private final UserService service;
 
     @PostMapping("/{userId}/events")
+    @ResponseStatus(HttpStatus.CREATED)
     public EventFullDto saveEvent(@PathVariable Integer userId,
                                   @Valid @RequestBody NewEventDto newEventDto) {
         return service.saveEvent(userId, newEventDto);
     }
 
 //    @GetMapping("/{userId}/events")
-//    public
+//    public EventFullDto get(@PathVariable Integer userId) {
+//        return service.getById(userId);
+//    }
 
 
 //    @GetMapping("/{userId}/events/{eventId}")

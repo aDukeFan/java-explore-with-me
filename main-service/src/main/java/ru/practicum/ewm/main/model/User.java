@@ -1,6 +1,7 @@
 package ru.practicum.ewm.main.model;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 @Accessors(chain = true)
 @Entity
 @Table(name = "users", schema = "public")
+@EqualsAndHashCode
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

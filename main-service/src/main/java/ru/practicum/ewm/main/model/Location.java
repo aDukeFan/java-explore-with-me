@@ -1,6 +1,7 @@
 package ru.practicum.ewm.main.model;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Accessors(chain = true)
 @Entity
 @Table(name = "locations", schema = "public")
+@EqualsAndHashCode
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

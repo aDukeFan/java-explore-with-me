@@ -16,6 +16,7 @@ import ru.practicum.ewm.main.repository.UserRepository;
 import ru.practicum.ewm.main.request.NewUserRequest;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +59,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CategoryDto updateCategory(Integer catId, NewCategoryDto newCategoryDto) {
-        return categoryMapper.toShow(categoryRepository.save(categoryMapper.toSave(newCategoryDto).setId(catId)));
+        if (categoryRepository.findById(catId).isPresent()) {
+            return categoryMapper.toShow(categoryRepository.save(categoryMapper.toSave(newCategoryDto).setId(catId)));
+        } else {
+            throw new NoSuchElementException("no category with id: " + catId);
+        }
     }
 }

@@ -19,7 +19,6 @@ import ru.practicum.ewm.main.request.NewUserRequest;
 import ru.practicum.ewm.main.service.AdminService;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -30,6 +29,7 @@ public class AdminController {
     public final AdminService service;
 
     @PostMapping("/users")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserDto saveUser(@Valid @RequestBody NewUserRequest newUserRequest) {
         return service.saveUser(newUserRequest);
     }
@@ -48,7 +48,8 @@ public class AdminController {
     }
 
     @PostMapping("/categories")
-    public CategoryDto saveCategory(@RequestBody NewCategoryDto newCategoryDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public CategoryDto saveCategory(@Valid @RequestBody NewCategoryDto newCategoryDto) {
         return service.saveCategory(newCategoryDto);
     }
 
@@ -59,8 +60,8 @@ public class AdminController {
     }
 
     @PatchMapping("/categories/{catId}")
-    public CategoryDto getCategory(@PathVariable Integer catId,
-                                   @RequestParam NewCategoryDto newCategoryDto) {
+    public CategoryDto updateCategory(@PathVariable Integer catId,
+                                      @RequestParam NewCategoryDto newCategoryDto) {
         return service.updateCategory(catId, newCategoryDto);
     }
 
