@@ -1,6 +1,5 @@
 package ru.practicum.ewm.main.exception;
 
-import org.hibernate.dialect.PostgreSQL9Dialect;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,15 +8,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import javax.validation.ValidationException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ErrorHandler {
@@ -54,7 +50,7 @@ public class ErrorHandler {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(Objects.requireNonNull(exception.getMessage()));
         StringBuilder builder = new StringBuilder();
-        builder.append("User with id=");
+        builder.append("Object with id=");
         while (matcher.find()) {
             builder.append(matcher.group());
         }

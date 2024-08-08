@@ -31,10 +31,10 @@ public class NewEventDto {
     @EventDate
     String eventDate;
     LocationDto location;
-    Boolean paid;
+    boolean paid = false;
     @PositiveOrZero
     Integer participantLimit;
-    Boolean requestModeration;
+    boolean requestModeration = true;
     @Size(min = 3, max = 120)
     String title;
 }

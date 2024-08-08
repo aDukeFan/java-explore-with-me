@@ -8,7 +8,7 @@ import ru.practicum.ewm.main.model.Category;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    Category toSave(NewCategoryDto categoryDto);
+    Category toSave(NewCategoryDto newCategoryDto);
 
     CategoryDto toShow(Category category);
 }

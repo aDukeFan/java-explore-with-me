@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.ewm.main.dto.CategoryDto;
+import ru.practicum.ewm.main.dto.CompilationDto;
+import ru.practicum.ewm.main.dto.EventFullDto;
 import ru.practicum.ewm.main.dto.NewCategoryDto;
+import ru.practicum.ewm.main.dto.NewCompilationDto;
 import ru.practicum.ewm.main.dto.UserDto;
 import ru.practicum.ewm.main.request.NewUserRequest;
+import ru.practicum.ewm.main.request.UpdateEventAdminRequest;
 import ru.practicum.ewm.main.service.AdminService;
 
 import javax.validation.Valid;
@@ -41,9 +45,9 @@ public class AdminController {
     }
 
     @GetMapping("/users")
-    public List<UserDto> getUsers(@RequestParam Integer[] ids,
-                                  @RequestParam Integer from,
-                                  @RequestParam Integer size) {
+    public List<UserDto> getUsers(@RequestParam(defaultValue = "null", required = false) Integer[] ids,
+                                  @RequestParam(defaultValue = "0", required = false) Integer from,
+                                  @RequestParam(defaultValue = "10", required = false) Integer size) {
         return service.getUsers(ids, from, size);
     }
 
@@ -61,17 +65,39 @@ public class AdminController {
 
     @PatchMapping("/categories/{catId}")
     public CategoryDto updateCategory(@PathVariable Integer catId,
-                                      @RequestParam NewCategoryDto newCategoryDto) {
+                                      @Valid @RequestBody NewCategoryDto newCategoryDto) {
         return service.updateCategory(catId, newCategoryDto);
     }
 
-//    @GetMapping("/events")
-//
-//    @PatchMapping("/events/{eventId}")
-//
-//    @PostMapping("/compilations")
-//
-//    @DeleteMapping("/compilations/{compId}")
-//
-//    @PatchMapping("/compilations/{compId}")
+    @GetMapping("/events")
+    public List<EventFullDto> getEventsWithParams(@RequestParam Integer[] users,
+                                                  @RequestParam String[] states,
+                                                  @RequestParam Integer[] categories,
+                                                  @RequestParam String rangeStart,
+                                                  @RequestParam String rangeEnd,
+                                                  @RequestParam(defaultValue = "0", required = false) Integer from,
+                                                  @RequestParam(defaultValue = "10", required = false) Integer size) {
+        return null;
+    }
+
+    @PatchMapping("/events/{eventId}")
+    public EventFullDto correctEvent(@PathVariable Integer eventId,
+                                     @RequestBody UpdateEventAdminRequest request) {
+        return null;
+    }
+
+    @PostMapping("/compilations")
+    public CompilationDto addNewCompilation(@RequestBody NewCompilationDto newCompilationDto) {
+        return null;
+    }
+
+    @DeleteMapping("/compilations/{compId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCompilation(@PathVariable Integer compId) {
+    }
+
+    @PatchMapping("/compilations/{compId}")
+    public CompilationDto updateCompilation(@PathVariable Integer compId) {
+        return null;
+    }
 }

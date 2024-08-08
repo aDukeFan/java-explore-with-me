@@ -10,13 +10,14 @@ import ru.practicum.ewm.main.dto.NewCategoryDto;
 import ru.practicum.ewm.main.dto.UserDto;
 import ru.practicum.ewm.main.mapper.CategoryMapper;
 import ru.practicum.ewm.main.mapper.UserMapper;
+import ru.practicum.ewm.main.model.Category;
 import ru.practicum.ewm.main.model.User;
 import ru.practicum.ewm.main.repository.CategoryRepository;
 import ru.practicum.ewm.main.repository.UserRepository;
 import ru.practicum.ewm.main.request.NewUserRequest;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +39,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<UserDto> getUsers(Integer[] ids, Integer from, Integer size) {
         Pageable pageable = PageRequest.of(from / size, size);
-        List<User> users = userRepository.findAllByIdIn(ids, pageable);
+        List<User> users = new ArrayList<>();
+        if (ids != null) {
+            users.addAll(userRepository.findAllByIdIn(ids, pageable));
+        } else {
+            users.addAll(userRepository.findAll(pageable).toList());
+        }
         return users.stream().map(userMapper::toShow).collect(Collectors.toList());
     }
 
@@ -59,10 +65,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public CategoryDto updateCategory(Integer catId, NewCategoryDto newCategoryDto) {
-        if (categoryRepository.findById(catId).isPresent()) {
-            return categoryMapper.toShow(categoryRepository.save(categoryMapper.toSave(newCategoryDto).setId(catId)));
-        } else {
-            throw new NoSuchElementException("no category with id: " + catId);
-        }
+        Category categoryToUpdate = categoryRepository.findById(catId).orElse(null);
+        assert categoryToUpdate != null;
+        categoryToUpdate.setName(newCategoryDto.getName());
+        return categoryMapper.toShow(categoryRepository.save(categoryToUpdate));
     }
 }
