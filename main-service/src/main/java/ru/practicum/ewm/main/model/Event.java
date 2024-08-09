@@ -32,7 +32,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "create_date")
+    @Column(name = "created_date")
     LocalDateTime createdOn;
     @Column(name = "event_date")
     LocalDateTime eventDate;
